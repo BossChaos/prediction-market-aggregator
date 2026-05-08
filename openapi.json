@@ -1,0 +1,160 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Prediction Market & Data Aggregator API",
+    "version": "1.0.0",
+    "description": "A comprehensive data aggregation API featuring Google Maps lead generation, job market intelligence, social media scraping (Reddit, Instagram, LinkedIn), Airbnb market insights, and prediction market analytics. Built on x402 micro-payment protocol.",
+    "contact": {
+      "email": "xiashaoyu48@gmail.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://prediction-market-aggregator.example.com",
+      "description": "Production server"
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "Service Discovery",
+        "description": "Returns available endpoints and service metadata.",
+        "responses": { "200": { "description": "Service discovery JSON" } }
+      }
+    },
+    "/health": {
+      "get": {
+        "summary": "Health Check",
+        "description": "Check if the API is running.",
+        "responses": { "200": { "description": "API is healthy" } }
+      }
+    },
+    "/api/run": {
+      "get": {
+        "summary": "Google Maps Search",
+        "description": "Search businesses on Google Maps by category and location.",
+        "parameters": [
+          { "name": "query", "in": "query", "required": true, "schema": { "type": "string" } },
+          { "name": "location", "in": "query", "required": true, "schema": { "type": "string" } },
+          { "name": "limit", "in": "query", "schema": { "type": "integer", "default": 20 } }
+        ],
+        "responses": { "200": { "description": "List of businesses" } }
+      }
+    },
+    "/api/details": {
+      "get": {
+        "summary": "Google Maps Place Details",
+        "description": "Get detailed business info by Place ID.",
+        "parameters": [
+          { "name": "placeId", "in": "query", "required": true, "schema": { "type": "string" } }
+        ],
+        "responses": { "200": { "description": "Business details" } }
+      }
+    },
+    "/api/jobs": {
+      "get": {
+        "summary": "Job Market Intelligence",
+        "description": "Search job listings from Indeed and LinkedIn.",
+        "parameters": [
+          { "name": "query", "in": "query", "required": true, "schema": { "type": "string" } },
+          { "name": "location", "in": "query", "schema": { "type": "string" } }
+        ],
+        "responses": { "200": { "description": "Job listings" } }
+      }
+    },
+    "/api/reviews": {
+      "get": {
+        "summary": "Fetch Business Reviews",
+        "description": "Fetch reviews for a specific business.",
+        "parameters": [
+          { "name": "placeId", "in": "query", "required": true, "schema": { "type": "string" } }
+        ],
+        "responses": { "200": { "description": "List of reviews" } }
+      }
+    },
+    "/api/reviews/summary": {
+      "get": {
+        "summary": "Review Summary",
+        "description": "Get a summarized review analysis for a business.",
+        "parameters": [
+          { "name": "placeId", "in": "query", "required": true, "schema": { "type": "string" } }
+        ],
+        "responses": { "200": { "description": "Review summary" } }
+      }
+    },
+    "/api/airbnb/search": {
+      "get": {
+        "summary": "Airbnb Search",
+        "description": "Search Airbnb listings by location.",
+        "parameters": [
+          { "name": "location", "in": "query", "required": true, "schema": { "type": "string" } }
+        ],
+        "responses": { "200": { "description": "Airbnb listings" } }
+      }
+    },
+    "/api/airbnb/details": {
+      "get": {
+        "summary": "Airbnb Listing Details",
+        "description": "Get details for a specific Airbnb listing.",
+        "parameters": [
+          { "name": "id", "in": "query", "required": true, "schema": { "type": "string" } }
+        ],
+        "responses": { "200": { "description": "Listing details" } }
+      }
+    },
+    "/api/reddit/search": {
+      "get": {
+        "summary": "Reddit Search",
+        "description": "Search Reddit posts by keyword.",
+        "parameters": [
+          { "name": "q", "in": "query", "required": true, "schema": { "type": "string" } }
+        ],
+        "responses": { "200": { "description": "Reddit posts" } }
+      }
+    },
+    "/api/reddit/trending": {
+      "get": {
+        "summary": "Reddit Trending",
+        "description": "Get trending posts on Reddit.",
+        "responses": { "200": { "description": "Trending posts" } }
+      }
+    },
+    "/api/instagram/profile": {
+      "get": {
+        "summary": "Instagram Profile",
+        "description": "Get Instagram user profile data.",
+        "parameters": [
+          { "name": "username", "in": "query", "required": true, "schema": { "type": "string" } }
+        ],
+        "responses": { "200": { "description": "Profile data" } }
+      }
+    },
+    "/api/linkedin/person": {
+      "get": {
+        "summary": "LinkedIn Person Profile",
+        "description": "Enrich LinkedIn person profiles.",
+        "parameters": [
+          { "name": "url", "in": "query", "required": true, "schema": { "type": "string" } }
+        ],
+        "responses": { "200": { "description": "Person profile data" } }
+      }
+    },
+    "/prediction/markets": {
+      "get": {
+        "summary": "Active Prediction Markets",
+        "description": "Fetch active prediction markets.",
+        "responses": { "200": { "description": "List of markets" } }
+      }
+    },
+    "/prediction/search": {
+      "get": {
+        "summary": "Search Prediction Markets",
+        "description": "Search prediction markets by keyword.",
+        "parameters": [
+          { "name": "q", "in": "query", "required": true, "schema": { "type": "string" } }
+        ],
+        "responses": { "200": { "description": "Matching markets" } }
+      }
+    }
+  }
+}
